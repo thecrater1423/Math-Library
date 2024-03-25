@@ -53,6 +53,32 @@ class Functions:
         for i in range(2,n+1):
             product*=i
         return product
+    def doubleFactorial(n):
+        if n==0:
+            return 1
+        if int(n)!=n:
+            print("Error! Double Factorial Function Only Takes Int")
+            return
+        product=1
+        if n%2==0:
+            for i in range(2,n+1,2):
+                product*=i
+            return product
+        for i in range(1,n+1,2):
+            product*=i
+        return product
+class Limit:
+    def inf(function,increment):
+        for i in range(0,100000,increment):
+            try:
+                value=function(i)
+            except:
+                print("Error Occured While Calculating. Possibly due to a value too large.")
+                pass
+            else:
+                print(value)
+        return
+
 class Series:
     class MaclaurenEmpty:
         radiusOfConvergence=0
@@ -86,3 +112,6 @@ class Series:
 
     
 print(Series.maclaurenSin.approximation(Constants.pi))
+def function(n):
+    return 2**(n)*2**(10*n)/Functions.doubleFactorial(2*n+3)
+Limit.inf(function,100)
