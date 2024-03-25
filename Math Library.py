@@ -69,7 +69,7 @@ class Functions:
         return product
 class Limit:
     def inf(function,increment):
-        for i in range(0,100000,increment):
+        for i in range(0,1000000,increment):
             try:
                 value=function(i)
             except:
@@ -111,7 +111,6 @@ class Series:
     maclaurenSin=MaclaurenSin()
 
     
-print(Series.maclaurenSin.approximation(Constants.pi))
 def function(n):
-    return 2**(n)*2**(10*n)/Functions.doubleFactorial(2*n+3)
-Limit.inf(function,100)
+    return 2**(n)*2**(100*n)/Functions.doubleFactorial(2*n+3)
+Limit.inf(function,100000)
