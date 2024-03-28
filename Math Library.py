@@ -68,15 +68,13 @@ class Functions:
             product*=i
         return product
 class Limit:
-    def inf(function,increment):
-        for i in range(0,1000000,increment):
+    def inf(function,increment,final):
+        for i in range(0,final,increment):
             try:
-                value=function(i)
+                print(function(i))
             except:
                 print("Error Occured While Calculating. Possibly due to a value too large.")
-                pass
-            else:
-                print(value)
+                continue
         return
 
 class Series:
@@ -110,7 +108,6 @@ class Series:
     maclaurenExp=MaclaurenExp()
     maclaurenSin=MaclaurenSin()
 
-    
-def function(n):
-    return 2**(n)*2**(100*n)/Functions.doubleFactorial(2*n+3)
-Limit.inf(function,100000)
+def function(x):
+    return 1000000000**x/(Functions.factorial(x))
+Limit.inf(function,1000000,10000000000)
