@@ -74,7 +74,6 @@ class Limit:
                 print(function(i))
             except:
                 print("Error Occured While Calculating. Possibly due to a value too large.")
-                continue
         return
 
 class Series:
@@ -107,7 +106,41 @@ class Series:
         radiusOfConvergence=None
     maclaurenExp=MaclaurenExp()
     maclaurenSin=MaclaurenSin()
-
-def function(x):
-    return 1000000000**x/(Functions.factorial(x))
-Limit.inf(function,1000000,10000000000)
+class LinAl:
+    class Vectors:
+        def collumns(matrix):
+            pass
+        def rows(matrix):\
+            pass
+        def dotProduct(vector1,vector2):
+            pass
+        def crossProduct(vector1,vector2):
+            pass
+    class Matrices:
+        def compileFromCollumns(collumns):
+            pass
+        def compileFromRows(rows):
+            values=[]
+            rowNumber=len(rows)
+            collumnNumber=len(rows[0].values)
+            for row in rows:
+                for value in row.values:
+                    values.append(value)
+            return rowNumber,collumnNumber,values
+        def multiply(matrix1,matrix2):
+            pass
+    class Matrix:
+        def __init__(self,rows,collumns,values):
+            self.rows=rows
+            self.collumns=collumns
+            self.values=values
+        
+    class Vector:
+        def __init__(self,values):
+            self.values=values
+rowa=LinAl.Vector([1,2,3])
+rowb=LinAl.Vector([1,2,3])
+rowc=LinAl.Vector([1,2,3])
+rows,collumns,values=LinAl.Matrices.compileFromRows([rowa,rowb,rowc])
+MatrixA=LinAl.Matrix(rows,collumns,values)
+print (MatrixA.values)
