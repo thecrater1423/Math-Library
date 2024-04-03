@@ -109,7 +109,16 @@ class Series:
 class LinAl:
     class Vectors:
         def collumns(matrix):
-            pass
+            rownumber,collumnnumber,values=matrix
+            collumns=[]
+            for i in range(collumnnumber):
+                collumns.append([])
+            i=0
+            for value in values:
+                collumns[i%rownumber].append(value)
+                i+=1
+            return collumns
+
         def rows(matrix):\
             pass
         def dotProduct(vector1,vector2):
@@ -117,30 +126,53 @@ class LinAl:
         def crossProduct(vector1,vector2):
             pass
     class Matrices:
-        def compileFromCollumns(collumns):
-            pass
-        def compileFromRows(rows):
+        def compileFromCollumns(vectors):
+            print(LinAl.Matrices.transpose(LinAl.Matrices.compileFromRows(vectors)))
+            return LinAl.Matrices.transpose(LinAl.Matrices.compileFromRows(vectors))
+        def compileFromRows(vectors):
             values=[]
-            rowNumber=len(rows)
-            collumnNumber=len(rows[0].values)
-            for row in rows:
-                for value in row.values:
-                    values.append(value)
+            rowNumber=len(vectors)
+            collumnNumber=len(vectors[0])
+            for row in vectors:
+                for i in range(collumnNumber):
+                    if i<len(row):
+                        values.append(row[i])
+                    else:
+                        values.append(0)
             return rowNumber,collumnNumber,values
+        def transpose(matrix):
+            return LinAl.Matrices.compileFromRows(LinAl.Vectors.collumns((MatrixA.rows,MatrixA.collumns,MatrixA.values)))
         def multiply(matrix1,matrix2):
             pass
     class Matrix:
-        def __init__(self,rows,collumns,values):
+        def __init__(self,truple):
+            rows,collumns,values=truple
             self.rows=rows
             self.collumns=collumns
             self.values=values
+        def printMatrix(self):
+            rowslist=[]
+            i=0
+            for row in range(self.rows):
+                rowstring="["
+                for collumn in range(self.collumns):
+                    rowstring=rowstring+" "+str(self.values[i])
+                    i+=1
+                rowstring= rowstring+" ]"
+                rowslist.append(rowstring)
+            for row in rowslist:
+                print(row)
+                    
         
     class Vector:
         def __init__(self,values):
             self.values=values
-rowa=LinAl.Vector([1,2,3])
-rowb=LinAl.Vector([1,2,3])
-rowc=LinAl.Vector([1,2,3])
-rows,collumns,values=LinAl.Matrices.compileFromRows([rowa,rowb,rowc])
-MatrixA=LinAl.Matrix(rows,collumns,values)
-print (MatrixA.values)
+vectora=LinAl.Vector([1,2,3])
+vectorb=LinAl.Vector([1,9])
+vectorc=LinAl.Vector([1,8,6])
+MatrixA=LinAl.Matrix(LinAl.Matrices.compileFromRows([vectora.values,vectorb.values,vectorc.values]))
+MatrixA.printMatrix()
+MatrixB=LinAl.Matrix(LinAl.Matrices.compileFromCollumns(LinAl.Vectors.collumns((MatrixA.rows,MatrixA.collumns,MatrixA.values))))
+MatrixB.printMatrix()
+print(LinAl.Matrices.transpose(MatrixA))
+print(LinAl.Matrices.transpose(MatrixB))
