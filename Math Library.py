@@ -115,10 +115,10 @@ class LinAl:
                 collumns.append([])
             i=0
             for value in values:
-                collumns[i%rownumber].append(value)
+                collumns[i%collumnnumber].append(value)
                 i+=1
             while len(collumns[collumnnumber-1])!=rownumber:
-                collumns[i%rownumber].append(0)
+                collumns[i%collumnnumber].append(0)
                 i+=1
             return collumns
         def rows(matrix):
@@ -167,15 +167,22 @@ class LinAl:
             rows1,collumns1,values1=matrix1
             rows2,collumns2,values2=matrix2
             if collumns1!=rows2:
-                print("These Matrices can not be multiplied, they are the wrong size!")
-                return
-            newrows=rows1
-            newcollumns=collumns2
+                print("These Matrices can not be multiplied, they are the wrong size, Giving zero Matrix!")
+                newvalues=[]
+                for i in range(rows1*collumns2):
+                    newvalues.append(0)
+                return rows1,collumns2,newvalues
             newvalues=[]
             for row in LinAl.Vectors.rows(matrix1):
                 for collumn in LinAl.Vectors.collumns(matrix2):
                     newvalues.append(LinAl.Vectors.dotProduct(row,collumn))
-            return newrows,newcollumns,newvalues
+            return rows1,collumns2,newvalues
+        def coefficient(matrix,coefficient):
+            rows,collumns,values=matrix
+            newvalues=[]
+            for value in values:
+                newvalues.append(value*coefficient)
+            return rows,collumns,newvalues
     class Matrix:
         def printMatrix(self):
             rowslist=[]
@@ -226,11 +233,9 @@ class LinAl:
 vectora=LinAl.Vector([1,2,3])
 vectorb=LinAl.Vector([1,9])
 vectorc=LinAl.Vector([1,8,6])
-vectord=LinAl.Vector([1,0,0])
-vectore=LinAl.Vector([0,0,1])
-vectorf=LinAl.Vector([0,1,0])
+vectord=LinAl.Vector([1,1,0,])
 MatrixA=LinAl.MatrixCollumns([vectora.values,vectorb.values,vectorc.values])
-MatrixB=LinAl.MatrixRows([vectord.values,vectore.values,vectorf.values])
+MatrixB=LinAl.MatrixCollumns([vectord.values])
 MatrixC=LinAl.MatrixTriple(LinAl.Matrices.multiply(MatrixA.key,MatrixB.key))
 MatrixC.printMatrix()
 
