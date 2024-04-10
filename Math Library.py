@@ -167,7 +167,7 @@ class LinAl:
             rows1,collumns1,values1=matrix1
             rows2,collumns2,values2=matrix2
             if collumns1!=rows2:
-                print("These Matrices can not be multiplied, they are the wrong size, Giving zero Matrix!")
+                print("These Matrices can not be multiplied, they are the wrong size, Returning zero Matrix!")
                 newvalues=[]
                 for i in range(rows1*collumns2):
                     newvalues.append(0)
@@ -233,7 +233,7 @@ class LinAl:
 vectora=LinAl.Vector([1,2,3])
 vectorb=LinAl.Vector([1,9])
 vectorc=LinAl.Vector([1,8,6])
-vectord=LinAl.Vector([1,1,0,])
+vectord=LinAl.Vector([1,1,1])
 MatrixA=LinAl.MatrixCollumns([vectora.values,vectorb.values,vectorc.values])
 MatrixB=LinAl.MatrixCollumns([vectord.values])
 MatrixC=LinAl.MatrixTriple(LinAl.Matrices.multiply(MatrixA.key,MatrixB.key))
